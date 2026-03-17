@@ -18,6 +18,9 @@ public class CLIMain {
             System.out.println("Masukkan max depth : ");
             int maxDepth = Integer.parseInt(scanner.nextLine());
 
+            System.out.println("Masukkan nama file output (.obj) : ");
+            String outputPath = scanner.nextLine();
+
             long startTime = System.nanoTime();
 
             Model model = ObjParser.parse(path);
@@ -36,7 +39,7 @@ public class CLIMain {
             OctreeResult octreeResult = pool.invoke(recurseOctree);
             pool.shutdown();
 
-            // TODO : implement output .obj and call below here
+            ObjWriter.write(octreeResult.getVoxels(), outputPath);
 
             long endTime = System.nanoTime();
             double totalTime = (endTime - startTime) / 1_000_000.0;
@@ -63,8 +66,7 @@ public class CLIMain {
             System.out.println("Kedalaman octree: " + maxDepth);
             System.out.println("Lama waktu program berjalan: " + totalTime + " ms");
 
-            // TODO : implement output and write it here
-            // System.out.println("Path file output: " + outputPath);
+            System.out.println("Path file output: " + outputPath);
 
         } 
         catch (NumberFormatException e) {
