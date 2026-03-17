@@ -5,9 +5,7 @@ import backend.filesystem.*;
 import backend.logic.*;
 import backend.filesystem.ObjParser;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
 
 public class CLIMain {
