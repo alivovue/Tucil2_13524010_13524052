@@ -49,7 +49,7 @@ public class ObjParser {
         return new Face(v1, v2, v3);
     }
 
-    private static Boolean isValidVertex(String line) {
+    private static boolean isValidVertex(String line) {
         // TODO : complete possible additions to is valid checking
         String[] words = line.trim().split("\\s+");
         return words.length == 4 && words[0].equals("v");

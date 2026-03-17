@@ -1,5 +1,7 @@
 package backend.data;
 
+import java.util.List;
+
 public class Cube {
     double minX;
     double minY;
