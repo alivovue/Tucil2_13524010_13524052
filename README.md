@@ -49,11 +49,12 @@ mvn javafx:run
 
 Cara Menggunakan Program
 1. Siapkan file model tiga dimensi berformat .obj
-2. Jalankan program melalui mode CLI atau GUI
-3. Masukkan file .obj yang ingin diproses
-4. Tentukan parameter yang diperlukan, seperti kedalaman maksimum Octree
-5. Program akan melakukan proses voxelization menggunakan pendekatan divide and conquer
-6. Hasil pemrosesan dapat diamati melalui output program maupun melalui viewer yang tersedia
+2. Letakkan file .obj ke dalam folder src/Tucil2_Project, yaitu folder yang berada sejajar dengan pom.xml
+3. Jalankan program melalui mode CLI atau GUI
+4. Masukkan file .obj yang ingin diproses
+5. Tentukan parameter yang diperlukan, seperti kedalaman maksimum Octree
+6. Program akan melakukan proses voxelization menggunakan pendekatan divide and conquer
+7. Hasil pemrosesan dapat diamati melalui output program maupun melalui viewer yang tersedia
 
 Pengembang:<br>
 13524010 — Audric Yusuf Maynard Simatupang<br>
