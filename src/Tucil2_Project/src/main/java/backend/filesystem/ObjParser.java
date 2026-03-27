@@ -27,6 +27,10 @@ public class ObjParser {
             else if (isValidFace(line)) {
                 model.addFace(parseFace(line));
             }
+            else {
+                bufferedReader.close();
+                throw new IllegalArgumentException("Invalid OBJ format detected");
+            }
         }
 
         bufferedReader.close();
@@ -50,15 +54,51 @@ public class ObjParser {
     }
 
     private static boolean isValidVertex(String line) {
-        // TODO : complete possible additions to is valid checking
         String[] words = line.trim().split("\\s+");
-        return words.length == 4 && words[0].equals("v");
+
+        if (words.length != 4) {
+            return false;
+        }
+
+        if (!words[0].equals("v")) {
+            return false;
+        }
+
+        return isDouble(words[1]) && isDouble(words[2]) && isDouble(words[3]);
     }
 
     public static boolean isValidFace(String line) {
-        String[] parts = line.trim().split("\\s+");
-        return parts.length == 4 && parts[0].equals("f");
+        String[] words = line.trim().split("\\s+");
+
+        if (words.length != 4) {
+            return false;
+        }
+
+        if (!words[0].equals("f")) {
+            return false;
+        }
+
+        return isInteger(words[1]) && isInteger(words[2]) && isInteger(words[3]);
     }
 
+    private static boolean isDouble(String text) {
+        try {
+            Double.parseDouble(text);
+            return true;
+        } 
+        catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static boolean isInteger(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } 
+        catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
 }

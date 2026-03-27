@@ -3,7 +3,6 @@ package backend;
 import backend.data.*;
 import backend.filesystem.*;
 import backend.logic.*;
-import backend.filesystem.ObjParser;
 
 import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
@@ -11,24 +10,57 @@ import java.util.concurrent.ForkJoinPool;
 public class CLIMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        String path = null;
+        int maxDepth = -1;
+        String outputPath = null;
+        Model model = null;
+
         try {
-            System.out.println("Masukkan file path : ");
-            String path = scanner.nextLine();
+            while (model == null) {
+                System.out.println("Masukkan file path : ");
+                path = scanner.nextLine();
 
-            System.out.println("Masukkan max depth : ");
-            int maxDepth = Integer.parseInt(scanner.nextLine());
+                try {
+                    model = ObjParser.parse(path);
 
-            System.out.println("Masukkan nama file output (.obj) : ");
-            String outputPath = scanner.nextLine();
+                    if (model.getVertices().isEmpty() || model.getFaces().isEmpty()) {
+                        System.out.println("Model kosong atau tidak valid. Silakan coba lagi.\n");
+                        model = null;
+                    }
+                } 
+                catch (Exception e) {
+                    System.out.println("File input tidak valid: " + e.getMessage());
+                    System.out.println("Silakan masukkan path lagi.\n");
+                }
+            }
+
+            while (maxDepth < 0) {
+                System.out.println("Masukkan max depth : ");
+                String depthInput = scanner.nextLine();
+
+                try {
+                    maxDepth = Integer.parseInt(depthInput);
+
+                    if (maxDepth < 0) {
+                        System.out.println("Max depth tidak boleh negatif.\n");
+                    }
+                } 
+                catch (NumberFormatException e) {
+                    System.out.println("Max depth harus berupa integer.\n");
+                }
+            }
+
+            while (outputPath == null || outputPath.isBlank()) {
+                System.out.println("Masukkan nama file output (.obj) : ");
+                outputPath = scanner.nextLine();
+
+                if (outputPath.isBlank()) {
+                    System.out.println("Nama file output tidak boleh kosong.\n");
+                }
+            }
 
             long startTime = System.nanoTime();
-
-            Model model = ObjParser.parse(path);
-
-            if (model.getVertices().isEmpty() || model.getFaces().isEmpty()) {
-                System.out.println("Model kosong atau tidak valid");
-                return;
-            }
 
             Cube rootCube = CalculatorUtil.buildRootCube(model);
 
@@ -65,12 +97,8 @@ public class CLIMain {
 
             System.out.println("Kedalaman octree: " + maxDepth);
             System.out.println("Lama waktu program berjalan: " + totalTime + " ms");
-
             System.out.println("Path file output: " + outputPath);
 
-        } 
-        catch (NumberFormatException e) {
-            System.out.println("Max depth harus berupa integer.");
         } 
         catch (Exception e) {
             System.out.println("Terjadi error: " + e.getMessage());
