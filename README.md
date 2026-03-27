@@ -42,7 +42,7 @@ Mode CLI
 mvn exec:java -Dexec.mainClass=backend.CLIMain
 ```
 
-Mode GUI
+Mode GUI untuk visualisasi
 ```bash
 mvn javafx:run
 ```
@@ -50,11 +50,11 @@ mvn javafx:run
 Cara Menggunakan Program
 1. Siapkan file model tiga dimensi berformat .obj
 2. Letakkan file .obj ke dalam folder src/Tucil2_Project, yaitu folder yang berada sejajar dengan pom.xml
-3. Jalankan program melalui mode CLI atau GUI
+3. Jalankan program melalui mode CLI
 4. Masukkan file .obj yang ingin diproses
 5. Tentukan parameter yang diperlukan, seperti kedalaman maksimum Octree
 6. Program akan melakukan proses voxelization menggunakan pendekatan divide and conquer
-7. Hasil pemrosesan dapat diamati melalui output program maupun melalui viewer yang tersedia
+7. Hasil pemrosesan dapat diamati melalui output program maupun melalui viewer yang tersedia dalam mode GUI
 
 Pengembang:<br>
 13524010 — Audric Yusuf Maynard Simatupang<br>
