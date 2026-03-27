@@ -29,6 +29,7 @@ public class UIHandler extends BorderPane {
             12,
             buttonHandler.getOpenButton(),
             buttonHandler.getResetButton(),
+            buttonHandler.getClearButton(),
             buttonHandler.getFilenameLabel()
         );
 
@@ -63,6 +64,18 @@ public class UIHandler extends BorderPane {
         """);
 
         buttonHandler.getResetButton().setStyle("""
+            -fx-background-color: #2a2a2a;
+            -fx-text-fill: #f0f0f0;
+            -fx-font-size: 13px;
+            -fx-font-weight: bold;
+            -fx-background-radius: 8;
+            -fx-border-color: #444444;
+            -fx-border-radius: 8;
+            -fx-padding: 8 16 8 16;
+            -fx-cursor: hand;
+        """);
+
+        buttonHandler.getClearButton().setStyle("""
             -fx-background-color: #2a2a2a;
             -fx-text-fill: #f0f0f0;
             -fx-font-size: 13px;

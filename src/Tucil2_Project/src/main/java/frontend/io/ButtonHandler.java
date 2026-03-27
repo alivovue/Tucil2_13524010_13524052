@@ -5,22 +5,21 @@ import java.io.File;
 import backend.data.Model;
 import backend.filesystem.ObjParser;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
 public class ButtonHandler {
     private Button openButton;
     private Button resetButton;
-    // private CheckBox wireframeCheckBox;
+    private Button clearButton;
     private Label fileNameLabel;
     private UIHandler uiHandler;
 
     public ButtonHandler(UIHandler uiHandler) {
         this.uiHandler = uiHandler;
         this.openButton = new Button("Open");
-        this.resetButton = new Button("Reset");
-        // this.wireframeCheckBox = new CheckBox("Wireframe");
+        this.resetButton = new Button("Default Position");
+        this.clearButton = new Button("Clear");
         this.fileNameLabel = new Label("No file selected");
 
         attachHandlers();
@@ -29,7 +28,7 @@ public class ButtonHandler {
     private void attachHandlers() {
         openButton.setOnAction(e -> handleOpenFile());
         resetButton.setOnAction(e -> handleResetFile());
-        // wireframeCheckBox.setOnAction(e -> handleWireFrame());
+        clearButton.setOnAction(e -> handleClearFile());
     }
 
     private void handleOpenFile() {
@@ -62,8 +61,10 @@ public class ButtonHandler {
         uiHandler.getViewerPanel().reset();
     }
 
-    // private void handleWireFrame() {
-    // }
+    private void handleClearFile() {
+        uiHandler.getViewerPanel().setModel(null);
+        uiHandler.getViewerPanel().reset();
+    }
 
     public Button getOpenButton() {
         return this.openButton;
@@ -73,9 +74,10 @@ public class ButtonHandler {
         return this.resetButton;
     }
 
-    // public CheckBox getWireframeCheckBox() {
-    //     return this.wireframeCheckBox;
-    // }
+    public Button getClearButton() {
+        return this.clearButton;
+    }
+
 
     public Label getFilenameLabel() {
         return this.fileNameLabel;
